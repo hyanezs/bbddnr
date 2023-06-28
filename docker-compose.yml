@@ -1,0 +1,54 @@
+version: '3.8'
+name: bbdd_cjy
+services:
+  backend:
+    container_name: bbdd_backend
+    build:
+      dockerfile: Dockerfile
+    environment:
+      - AWS_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=fakeAcessKey
+      - AWS_SECRET_ACCESS_KEY=fakeSecretAccessKey
+      - DYNAMODB_ENDPOINT=http://dynamodb:8000
+      - NODE_ENV=development
+
+    ports:
+      - '5000:5000'
+    networks:
+      - bbdd
+    depends_on:
+      - dynamodb
+      - elasticsearch
+
+  dynamodb:
+    image: amazon/dynamodb-local:latest
+    environment:
+      - AWS_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=fakeAcessKey
+      - AWS_SECRET_ACCESS_KEY=fakeSecretAccessKey
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ."
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./data:/data
+    networks:
+      - bbdd
+  
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:latest
+    container_name: elasticsearch
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - discovery.type=single-node
+    networks:
+      - bbdd
+
+networks:
+  bbdd:
+    name: bbdd
+
+volumes:
+  db:
+    driver: local
