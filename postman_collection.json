@@ -1,0 +1,134 @@
+{
+	"info": {
+		"_postman_id": "0bf0cb24-644b-4a6b-bb6c-256618a088a8",
+		"name": "BBDD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14510049",
+		"_collection_link": "https://hystudio.postman.co/workspace/Arq.-de-Software~fc4163af-0b4f-4ce2-bf12-91403f4cf26c/collection/14510049-0bf0cb24-644b-4a6b-bb6c-256618a088a8?action=share&creator=14510049&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Doe\",\r\n    \"username\": \"johndoe\",\r\n    \"profileImagePath\": \"/path/to/profile/image.jpg\",\r\n    \"friends\": [\r\n        \"friend1\",\r\n        \"friend2\"\r\n    ],\r\n    \"servers\": [\r\n        \"server1\"\r\n    ],\r\n    \"email\": \"johndoe@exaaale.com\",\r\n    \"password\": \"secretpassword\",\r\n    \"gender\": \"male\",\r\n    \"birthdate\": \"1990-01-01\",\r\n    \"nitro\": {\r\n        \"animatedAvatarPath\": \"/path/to/animated/avatar.gif\",\r\n        \"profileBannerPath\": \"/path/to/profile/banner.jpg\",\r\n        \"profiles\": [\r\n            {\r\n                \"server\": \"serverId\",\r\n                \"override\": {\r\n                    \"username\": \"otherjohn\"\r\n                }\r\n            }\r\n        ]\r\n    },\r\n    \"settings\": {\r\n        \"privacy\": {\r\n            \"allowDirectMessages\": true,\r\n            \"shareData\": false,\r\n            \"allowTracking\": true\r\n        },\r\n        \"security\": {\r\n            \"filterSpamLevel\": 2,\r\n            \"filterImageLevel\": 1,\r\n            \"twoFactor\": {\r\n                \"type\": \"sms\",\r\n                \"data\": \"+1234567890\"\r\n            }\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Messages",
+			"item": [
+				{
+					"name": "Create Message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"data\": \"This is one message from user 2. https://discord.com/channels/715322688553615443/822080506459586580/988831082692632626\",\r\n  \"userId\": \"user2\",\r\n  \"channelId\": \"1231231890\",\r\n  \"mentionedUsers\": [\"useriD2\", \"useriD3\"],\r\n  \"hashtags\": [\"tag1\", \"tag2\"],\r\n  \"mediaPaths\": [\"path/video/2\"],\r\n  \"isPinned\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/messages",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Messages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/messages",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"messages"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000",
+			"type": "string"
+		}
+	]
+}

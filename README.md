@@ -89,3 +89,5 @@ ajería y recuperación de datos. A continuación se muestran algunos de los pun
 - `GET /users`: Obtener usuarios
 
 Consulte el código fuente de la API para obtener información detallada sobre los puntos finales disponibles y su uso.
+
+Dejamos una [coleccion de postman](./postman_collection.json) con requests para publicar usuarios y mensajes.
