@@ -5,21 +5,47 @@ import {
   type Response,
 } from 'express';
 import { getUsers, registerUser } from '../logic/usersLogics';
-import { type RegisterUser } from '../types';
 import { StatusCodes } from '../types/error';
+import { type User } from '../types/models';
 const usersController = Router();
 
 // POST /users
 usersController.post(
   '/',
   async (req: Request, res: Response, next: NextFunction) => {
-    const data = req.body as RegisterUser;
+    const {
+      firstName,
+      lastName,
+      username,
+      profileImagePath,
+      friends,
+      servers,
+      email,
+      password,
+      gender,
+      birthdate,
+      nitro,
+      settings,
+    } = req.body as User;
 
     try {
-      const user = await registerUser(data);
+      const user = await registerUser({
+        firstName,
+        lastName,
+        username,
+        profileImagePath,
+        friends,
+        servers,
+        email,
+        password,
+        gender,
+        birthdate,
+        nitro,
+        settings,
+      } as User);
 
       res.status(StatusCodes.OK).send({
-        success: `User ${data.firstName} with email ${data.email} registered successfully`,
+        success: `User ${firstName} with email ${email} registered successfully`,
         data: user,
       });
     } catch (e: any) {
@@ -34,8 +60,6 @@ usersController.post(
 usersController.get(
   '/',
   async (req: Request, res: Response, next: NextFunction) => {
-    const data = req.body as RegisterUser;
-
     try {
       const response = await getUsers();
 

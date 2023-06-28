@@ -12,6 +12,13 @@ const config = {
   region: process.env.AWS_REGION,
 };
 
+const marshallOptions = {
+  convertEmptyValues: true, // False, by default.
+  removeUndefinedValues: true, // False, by default.
+};
+
+const translateConfig = { marshallOptions };
+
 let client: DynamoDBClient;
 let docClient: DynamoDBDocumentClient;
 
@@ -19,7 +26,7 @@ const initDynamoDb = async () => {
   try {
     logger.info('Trying to connect to dynamo db.');
     client = new DynamoDBClient(config);
-    docClient = DynamoDBDocumentClient.from(client);
+    docClient = DynamoDBDocumentClient.from(client, translateConfig);
     await seedDynamoDb();
     logger.info('Connection to dynamo db has been established successfully.');
     return true;
@@ -29,8 +36,4 @@ const initDynamoDb = async () => {
   }
 };
 
-const tables = {
-  users: 'users',
-};
-
-export { client, docClient, initDynamoDb, tables };
+export { client, docClient, initDynamoDb };

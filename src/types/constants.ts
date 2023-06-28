@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-const roles = {
-  ADMIN: 'admin',
-  EMPLOYEE: 'employee',
+const tables = {
+  users: 'users',
+  userSettings: 'userSettings',
+  messages: 'messages',
 };
 
-export { roles };
+export { tables };
